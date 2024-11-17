@@ -130,7 +130,7 @@ export default function HomePage() {
           <div className="flex align-middle justify-between">
             <h2 className="text-xl font-bold">MRI Images</h2>
             <Link href="/comparation">
-              <button className="p-1 border border-black text-black text-xs rounded-md">
+              <button className="p-1 border text-xs rounded-md">
                 Compare
               </button>
             </Link>

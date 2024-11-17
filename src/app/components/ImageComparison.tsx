@@ -61,14 +61,14 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
       <div className="flex flex-col align-middle md:flex-row justify-center md:justify-between mb-4 gap-2">
         {/* Left Image select */}
         <div className="flex md:flex-row justify-center gap-0.5 items-center">
-          <label className="mr-2">Left Image</label>
+          <label className="mr-2 text-sm">Left Image</label>
           <select
             value={leftImageIndex}
             onChange={(e) => {
               onLeftImageChange(Number(e.target.value))
               resetZoomOnChange('left')
             }}
-            className="p-2 border rounded"
+            className="p-2 border rounded text-sm"
           >
             {images.map((image, index) => (
               <option key={index} value={index}>
@@ -80,14 +80,14 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
 
         {/* Right Image select */}
         <div className="flex md:flex-row justify-center gap-0.5 items-center">
-          <label className="mr-2">Right Image</label>
+          <label className="mr-2 text-sm">Right Image</label>
           <select
             value={rightImageIndex}
             onChange={(e) => {
               onRightImageChange(Number(e.target.value))
               resetZoomOnChange('right')
             }}
-            className="p-2 border rounded"
+            className="p-2 border rounded text-sm"
           >
             {images.map((image, index) => (
               <option key={index} value={index}>
