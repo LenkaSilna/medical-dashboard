@@ -87,7 +87,7 @@ export default function HomePage() {
   return (
     <div className="container mx-auto p-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Levý sloupec - Informace o pacientovi */}
+        {/* Left column - patient info */}
         <div>
           <h2 className="text-xl font-bold mb-4">Patient Information</h2>
           <PatientCard
@@ -108,7 +108,7 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Pravý sloupec - MRI snímky */}
+        {/* Right column - MRI images */}
         <div className="space-y-4">
           <h2 className="text-xl font-bold mb-4">MRI Images</h2>
           <div className="flex flex-col gap-4">
