@@ -26,8 +26,8 @@ This is a medical dashboard application designed for displaying patient medical 
 Clone the repository and install the required dependencies using the following commands:
 
 ```
-git clone
-cd
+git clone https://github.com/LenkaSilna/medical-dashboard.git
+cd medical-dashboard
 npm install
 ```
 
