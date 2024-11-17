@@ -1,0 +1,91 @@
+{
+  "patients": [
+    {
+      "id": "1",
+      "firstName": "Jan",
+      "lastName": "Novák",
+      "age": 45,
+      "dateOfBirth": "1979-03-15",
+      "gender": "male",
+      "bloodType": "A+",
+      "weight": 82,
+      "height": 180,
+      "contactInfo": {
+        "email": "jan.novak@email.cz",
+        "phone": "+420 777 888 999",
+        "address": {
+          "street": "Dlouhá 123",
+          "city": "Praha",
+          "zipCode": "110 00"
+        }
+      },
+      "lastDiagnosis": "Chronic Migraine with Aura",
+      "lastExamDate": "2024-01-15",
+      "medicalHistory": [
+        {
+          "date": "2023-12-10",
+          "condition": "Migraine Attack",
+          "treatment": "Sumatriptan 50mg",
+          "notes": "Severe headache with visual disturbances"
+        },
+        {
+          "date": "2023-10-05",
+          "condition": "Annual Check-up",
+          "treatment": "None",
+          "notes": "All vital signs normal"
+        }
+      ],
+      "allergies": ["Penicillin", "Pollen"],
+      "medications": [
+        {
+          "name": "Sumatriptan",
+          "dosage": "50mg",
+          "frequency": "As needed",
+          "startDate": "2023-09-01"
+        },
+        {
+          "name": "Propranolol",
+          "dosage": "40mg",
+          "frequency": "Daily",
+          "startDate": "2023-08-15"
+        }
+      ],
+      "brainMRI": {
+        "id": "mri1",
+        "date": "2024-01-10",
+        "radiologist": "MUDr. Eva Svobodová",
+        "equipmentInfo": "Siemens MAGNETOM Prisma 3T",
+        "slices": [
+          {
+            "id": "slice1",
+            "imageUrl": "/images/mri-slice-1.jpg",
+            "position": "Axial",
+            "description": "T1-weighted image showing normal brain structure",
+            "findings": "No abnormalities detected",
+            "sequence": "T1",
+            "sliceThickness": "3mm"
+          },
+          {
+            "id": "slice2",
+            "imageUrl": "/images/mri-slice-2.jpg",
+            "position": "Sagittal",
+            "description": "T2-weighted image of midline structures",
+            "findings": "Minor white matter changes",
+            "sequence": "T2",
+            "sliceThickness": "3mm"
+          },
+          {
+            "id": "slice3",
+            "imageUrl": "/images/mri-slice-3.jpg",
+            "position": "Coronal",
+            "description": "FLAIR sequence showing temporal lobes",
+            "findings": "No significant abnormalities",
+            "sequence": "FLAIR",
+            "sliceThickness": "3mm"
+          }
+        ],
+        "conclusion": "No significant pathological findings"
+      }
+    }
+  ]
+}

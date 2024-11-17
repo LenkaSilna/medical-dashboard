@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Medical Dashboard
 
-## Getting Started
+This is a medical dashboard application designed for displaying patient medical data, including patient information, MRI images, and other related details. It provides an interactive user interface for comparing MRI images, managing patient information, and supporting various features such as theming and dynamic data fetching.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Patient Information**: Displays basic information about the patient including name, age, gender, blood type, weight, height, contact information, diagnosis, and medical history.
+- **MRI Image Comparison**: Allows users to compare MRI images side-by-side with zoom functionality.
+- **Responsive Design**: The application is fully responsive and works well on both desktop and mobile devices.
+- **Theming**: Supports light and dark themes that can be toggled dynamically.
+- **Dynamic Data Fetching**: Patient data is fetched from a GraphQL API.
+
+## Technologies Used
+
+- **React**: A JavaScript library for building user interfaces.
+- **Next.js**: React framework for server-side rendering and static site generation.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **GraphQL**: For querying patient data.
+- **TypeScript**: Superset of JavaScript for type safety.
+- **React Icons**: For adding icons to the UI.
+
+## Installation
+
+### Step 1: Install Dependencies
+
+Clone the repository and install the required dependencies using the following commands:
+
+```
+git clone
+cd
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Step 2: Start the Development Server
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Once the dependencies are installed, you can start the development server:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+npm run dev
+```
 
-## Learn More
+## Folder Structure
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The folder structure of the project is as follows:
+src/
+app/
+components/ # Reusable components (e.g., Header, ImageComparison, etc.)
+context/ # React Context for managing global state (e.g., ThemeContext, UrqlContext)
+data/ # Sample data or API responses (e.g., patient-data.json)
+graphql/ # GraphQL queries
+styles/ # Global styles (globals.css)
+types/ # TypeScript types (e.g., patient.ts)
+layout.tsx # Main layout component
+page.tsx # Main page component
+public/ # Public assets (e.g., images, icons)
+node_modules/ # Node modules
