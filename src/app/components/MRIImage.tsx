@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import Image from 'next/image'
-import Link from 'next/link'
 
 interface MRIImageProps {
   imageUrl: string
@@ -25,7 +24,7 @@ const MRIImage: React.FC<MRIImageProps> = ({
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-md border">
-      <div className="relative aspect-video mb-4">
+      <div className="relative aspect-square mb-4">
         <Image
           src={imageUrl}
           alt={description}
@@ -33,11 +32,6 @@ const MRIImage: React.FC<MRIImageProps> = ({
           className="rounded-lg object-cover"
         />
       </div>
-      <Link href="/comparation">
-        <button className="p-2 border border-black text-black rounded-md">
-          Compare
-        </button>
-      </Link>
 
       <div className="space-y-2">
         <div className="mt-4">

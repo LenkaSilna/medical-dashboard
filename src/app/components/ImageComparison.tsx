@@ -23,10 +23,19 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
 
   // Zoom functions
   const zoomInLeft = () => setZoomLevelLeft((prev) => prev * 1.2)
-  const zoomOutLeft = () => setZoomLevelLeft((prev) => prev / 1.2)
-
   const zoomInRight = () => setZoomLevelRight((prev) => prev * 1.2)
-  const zoomOutRight = () => setZoomLevelRight((prev) => prev / 1.2)
+
+  const zoomOutLeft = () => {
+    if (zoomLevelLeft > 1) {
+      setZoomLevelLeft((prev) => prev / 1.2)
+    }
+  }
+
+  const zoomOutRight = () => {
+    if (zoomLevelRight > 1) {
+      setZoomLevelRight((prev) => prev / 1.2)
+    }
+  }
 
   const handleWheel = (e: React.WheelEvent, side: 'left' | 'right') => {
     if (side === 'left') {

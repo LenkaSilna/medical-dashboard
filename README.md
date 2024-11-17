@@ -42,6 +42,7 @@ npm run dev
 ## Folder Structure
 
 The folder structure of the project is as follows:
+
 ```
 src/
     app/

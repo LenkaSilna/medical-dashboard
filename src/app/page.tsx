@@ -1,10 +1,13 @@
 'use client'
 
+import { useState } from 'react'
 import { useQuery } from 'urql'
 import { gql } from 'graphql-tag'
 import PatientCard from './components/PatientCard'
 import MRIImage from './components/MRIImage'
 import { GetPatientsResponse } from './types/patient'
+import Link from 'next/link'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
 const GET_PATIENTS = gql`
   query GetPatients {
@@ -63,6 +66,20 @@ const GET_PATIENTS = gql`
 `
 
 export default function HomePage() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  const handlePrevImage = () => {
+    if (currentImageIndex > 0) {
+      setCurrentImageIndex(currentImageIndex - 1)
+    }
+  }
+
+  const handleNextImage = () => {
+    if (currentImageIndex < patient.brainMRI.slices.length - 1) {
+      setCurrentImageIndex(currentImageIndex + 1)
+    }
+  }
+
   const [result] = useQuery<GetPatientsResponse>({
     query: GET_PATIENTS,
   })
@@ -110,21 +127,48 @@ export default function HomePage() {
 
         {/* Right column - MRI images */}
         <div className="space-y-4">
-          <h2 className="text-xl font-bold mb-4">MRI Images</h2>
-          <div className="flex flex-col gap-4">
-            {patient.brainMRI.slices.map((slice) => (
-              <MRIImage
-                key={slice.id}
-                imageUrl={slice.imageUrl}
-                description={slice.description}
-                position={slice.position}
-                findings={slice.findings}
-                sequence={slice.sequence}
-                sliceThickness={slice.sliceThickness}
-              />
-            ))}
+          <div className="flex align-middle justify-between">
+            <h2 className="text-xl font-bold">MRI Images</h2>
+            <Link href="/comparation">
+              <button className="p-1 border border-black text-black text-xs rounded-md">
+                Compare
+              </button>
+            </Link>
           </div>
-          <div className="mt-4"></div>
+          <div className="flex flex-col">
+            <MRIImage
+              key={patient.brainMRI.slices[currentImageIndex].id}
+              imageUrl={patient.brainMRI.slices[currentImageIndex].imageUrl}
+              description={
+                patient.brainMRI.slices[currentImageIndex].description
+              }
+              position={patient.brainMRI.slices[currentImageIndex].position}
+              findings={patient.brainMRI.slices[currentImageIndex].findings}
+              sequence={patient.brainMRI.slices[currentImageIndex].sequence}
+              sliceThickness={
+                patient.brainMRI.slices[currentImageIndex].sliceThickness
+              }
+            />
+          </div>
+          <div className="mt-4 flex justify-between w-full max-w-sm">
+            <button
+              onClick={handlePrevImage}
+              disabled={currentImageIndex === 0}
+              className="p-2 bg-gray-600 text-white rounded-full disabled:opacity-30"
+            >
+              <FaArrowLeft size={20} />
+            </button>
+
+            <button
+              onClick={handleNextImage}
+              disabled={
+                currentImageIndex === patient.brainMRI.slices.length - 1
+              }
+              className="p-2 bg-gray-600 text-white rounded-full disabled:opacity-30"
+            >
+              <FaArrowRight size={20} />
+            </button>
+          </div>
         </div>
       </div>
     </div>

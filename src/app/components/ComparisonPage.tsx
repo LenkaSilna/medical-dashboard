@@ -30,9 +30,9 @@ const ComparisonPage: React.FC = () => {
     <div className="container mx-auto">
       <div className="flex items-center mb-4">
         <div className="mr-2 cursor-pointer" onClick={handleBackClick}>
-          <FaArrowLeft size={20} className="text-gray-600" />
+          <FaArrowLeft className="text-gray-600" />
         </div>
-        <h2 className="text-2xl font-bold">Image Comparison</h2>
+        <h2 className="text-xl font-bold">Image Comparison</h2>
       </div>
 
       <ImageComparison

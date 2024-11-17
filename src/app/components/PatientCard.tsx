@@ -163,10 +163,18 @@ const PatientCard: React.FC<PatientCardProps> = ({
           <div className="space-y-2 text-sm text-gray-600">
             {medications.map((medication: Medication, index: number) => (
               <div key={index} className="bg-gray-50 p-2 rounded">
-                <p className="font-medium">{medication.name}</p>
-                <p>Dosage: {medication.dosage}</p>
-                <p>Frequency: {medication.frequency}</p>
-                <p>Started: {medication.startDate}</p>
+                <p className="font-bold">{medication.name}</p>
+                <p>
+                  <span className="font-bold">Dosage:</span> {medication.dosage}
+                </p>
+                <p>
+                  <span className="font-bold">Frequency:</span>{' '}
+                  {medication.frequency}
+                </p>
+                <p>
+                  <span className="font-bold">Started:</span>{' '}
+                  {medication.startDate}
+                </p>
               </div>
             ))}
           </div>
