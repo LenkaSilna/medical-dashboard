@@ -42,6 +42,7 @@ npm run dev
 ## Folder Structure
 
 The folder structure of the project is as follows:
+```
 src/
 app/
 components/ # Reusable components (e.g., Header, ImageComparison, etc.)
@@ -54,3 +55,4 @@ layout.tsx # Main layout component
 page.tsx # Main page component
 public/ # Public assets (e.g., images, icons)
 node_modules/ # Node modules
+```
