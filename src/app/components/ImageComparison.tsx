@@ -1,6 +1,11 @@
 'use client'
 import React, { useState } from 'react'
-import { FaSearchPlus, FaSearchMinus, FaChevronDown, FaChevronUp } from 'react-icons/fa'
+import {
+  FaSearchPlus,
+  FaSearchMinus,
+  FaChevronDown,
+  FaChevronUp,
+} from 'react-icons/fa'
 import Image from 'next/image'
 import { MRISlice } from '@/app/types/patient'
 
@@ -27,39 +32,39 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
   const [showRightInfo, setShowRightInfo] = useState(false)
   console.log(slicesInfo)
 
- // Zoom functions
- const zoomInLeft = () => setZoomLevelLeft((prev) => prev * 1.2)
- const zoomInRight = () => setZoomLevelRight((prev) => prev * 1.2)
+  // Zoom functions
+  const zoomInLeft = () => setZoomLevelLeft((prev) => prev * 1.2)
+  const zoomInRight = () => setZoomLevelRight((prev) => prev * 1.2)
 
- const zoomOutLeft = () => {
-   if (zoomLevelLeft > 1) {
-     setZoomLevelLeft((prev) => prev / 1.2)
-   }
- }
+  const zoomOutLeft = () => {
+    if (zoomLevelLeft > 1) {
+      setZoomLevelLeft((prev) => prev / 1.2)
+    }
+  }
 
- const zoomOutRight = () => {
-   if (zoomLevelRight > 1) {
-     setZoomLevelRight((prev) => prev / 1.2)
-   }
- }
+  const zoomOutRight = () => {
+    if (zoomLevelRight > 1) {
+      setZoomLevelRight((prev) => prev / 1.2)
+    }
+  }
 
- const handleWheel = (e: React.WheelEvent, side: 'left' | 'right') => {
-   if (side === 'left') {
-     if (e.deltaY < 0) zoomInLeft()
-     else zoomOutLeft()
-   } else {
-     if (e.deltaY < 0) zoomInRight()
-     else zoomOutRight()
-   }
- }
+  const handleWheel = (e: React.WheelEvent, side: 'left' | 'right') => {
+    if (side === 'left') {
+      if (e.deltaY < 0) zoomInLeft()
+      else zoomOutLeft()
+    } else {
+      if (e.deltaY < 0) zoomInRight()
+      else zoomOutRight()
+    }
+  }
 
- const resetZoomOnChange = (side: 'left' | 'right') => {
-   if (side === 'left') {
-     setZoomLevelLeft(1.2)
-   } else {
-     setZoomLevelRight(1.2)
-   }
- }
+  const resetZoomOnChange = (side: 'left' | 'right') => {
+    if (side === 'left') {
+      setZoomLevelLeft(1.2)
+    } else {
+      setZoomLevelRight(1.2)
+    }
+  }
 
   return (
     <div className="relative">
@@ -157,19 +162,24 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
               <div className="p-4 border-t">
                 <div className="space-y-2 text-sm">
                   <p>
-                    <span className="font-bold">Position:</span> {slicesInfo[leftImageIndex].position}
+                    <span className="font-bold">Position:</span>{' '}
+                    {slicesInfo[leftImageIndex].position}
                   </p>
                   <p>
-                    <span className="font-bold">Sequence:</span> {slicesInfo[leftImageIndex].sequence}
+                    <span className="font-bold">Sequence:</span>{' '}
+                    {slicesInfo[leftImageIndex].sequence}
                   </p>
                   <p>
-                    <span className="font-bold">Thickness:</span> {slicesInfo[leftImageIndex].sliceThickness}
+                    <span className="font-bold">Thickness:</span>{' '}
+                    {slicesInfo[leftImageIndex].sliceThickness}
                   </p>
                   <p>
-                    <span className="font-bold">Description:</span> {slicesInfo[leftImageIndex].description}
+                    <span className="font-bold">Description:</span>{' '}
+                    {slicesInfo[leftImageIndex].description}
                   </p>
                   <p>
-                    <span className="font-bold">Findings:</span> {slicesInfo[leftImageIndex].findings}
+                    <span className="font-bold">Findings:</span>{' '}
+                    {slicesInfo[leftImageIndex].findings}
                   </p>
                 </div>
               </div>
@@ -228,19 +238,24 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
               <div className="p-4 border-t">
                 <div className="space-y-2 text-sm">
                   <p>
-                    <span className="font-bold">Position:</span> {slicesInfo[rightImageIndex].position}
+                    <span className="font-bold">Position:</span>{' '}
+                    {slicesInfo[rightImageIndex].position}
                   </p>
                   <p>
-                    <span className="font-bold">Sequence:</span> {slicesInfo[rightImageIndex].sequence}
+                    <span className="font-bold">Sequence:</span>{' '}
+                    {slicesInfo[rightImageIndex].sequence}
                   </p>
                   <p>
-                    <span className="font-bold">Thickness:</span> {slicesInfo[rightImageIndex].sliceThickness}
+                    <span className="font-bold">Thickness:</span>{' '}
+                    {slicesInfo[rightImageIndex].sliceThickness}
                   </p>
                   <p>
-                    <span className="font-bold">Description:</span> {slicesInfo[rightImageIndex].description}
+                    <span className="font-bold">Description:</span>{' '}
+                    {slicesInfo[rightImageIndex].description}
                   </p>
                   <p>
-                    <span className="font-bold">Findings:</span> {slicesInfo[rightImageIndex].findings}
+                    <span className="font-bold">Findings:</span>{' '}
+                    {slicesInfo[rightImageIndex].findings}
                   </p>
                 </div>
               </div>

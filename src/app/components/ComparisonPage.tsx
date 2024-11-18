@@ -10,7 +10,8 @@ const ComparisonPage: React.FC = () => {
   const [leftImageIndex, setLeftImageIndex] = useState(0)
   const [rightImageIndex, setRightImageIndex] = useState(1)
 
-  const { loading, error, data } = useQuery<GetPatientsResponse>(GET_PATIENT_IMAGES)
+  const { loading, error, data } =
+    useQuery<GetPatientsResponse>(GET_PATIENT_IMAGES)
 
   const handleLeftImageChange = (index: number) => {
     setLeftImageIndex(index)
@@ -29,7 +30,11 @@ const ComparisonPage: React.FC = () => {
   }
 
   if (error) {
-    return <p className="text-center text-red-500">Error loading images: {error.message}</p>
+    return (
+      <p className="text-center text-red-500">
+        Error loading images: {error.message}
+      </p>
+    )
   }
 
   if (!data || !data.patients[0]?.brainMRI?.slices) {
@@ -37,7 +42,7 @@ const ComparisonPage: React.FC = () => {
   }
 
   const { slices } = data.patients[0].brainMRI
-  const comparisonImages = slices.map(slice => {
+  const comparisonImages = slices.map((slice) => {
     if (slice.imageUrl.startsWith('/')) {
       return `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}${slice.imageUrl}`
     }

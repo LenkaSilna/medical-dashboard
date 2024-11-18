@@ -20,7 +20,10 @@ export default function HomePage() {
   }
 
   const handleNextImage = () => {
-    if (data && currentImageIndex < data.patients[0].brainMRI.slices.length - 1) {
+    if (
+      data &&
+      currentImageIndex < data.patients[0].brainMRI.slices.length - 1
+    ) {
       setCurrentImageIndex(currentImageIndex + 1)
     }
   }
@@ -31,7 +34,11 @@ export default function HomePage() {
 
   if (error) {
     console.error('Error fetching patients:', error)
-    return <p className="text-center text-red-500">Failed to load data: {error.message}</p>
+    return (
+      <p className="text-center text-red-500">
+        Failed to load data: {error.message}
+      </p>
+    )
   }
 
   if (!data || !data.patients.length) {
@@ -69,20 +76,22 @@ export default function HomePage() {
           <div className="flex align-middle justify-between">
             <h2 className="text-xl font-bold">MRI Images</h2>
             <Link href="/comparation">
-              <button className="p-1 border text-xs rounded-md">
-                Compare
-              </button>
+              <button className="p-1 border text-xs rounded-md">Compare</button>
             </Link>
           </div>
           <div className="flex flex-col">
             <MRIImage
               key={patient.brainMRI.slices[currentImageIndex].id}
               imageUrl={patient.brainMRI.slices[currentImageIndex].imageUrl}
-              description={patient.brainMRI.slices[currentImageIndex].description}
+              description={
+                patient.brainMRI.slices[currentImageIndex].description
+              }
               position={patient.brainMRI.slices[currentImageIndex].position}
               findings={patient.brainMRI.slices[currentImageIndex].findings}
               sequence={patient.brainMRI.slices[currentImageIndex].sequence}
-              sliceThickness={patient.brainMRI.slices[currentImageIndex].sliceThickness}
+              sliceThickness={
+                patient.brainMRI.slices[currentImageIndex].sliceThickness
+              }
             />
           </div>
           <div className="flex justify-between gap-8 mt-4">
@@ -96,7 +105,9 @@ export default function HomePage() {
 
             <button
               onClick={handleNextImage}
-              disabled={currentImageIndex === patient.brainMRI.slices.length - 1}
+              disabled={
+                currentImageIndex === patient.brainMRI.slices.length - 1
+              }
               className="p-2 bg-gray-600 text-white rounded-full disabled:opacity-30"
             >
               <FaArrowRight size={20} />

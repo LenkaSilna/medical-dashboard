@@ -49,7 +49,7 @@ src/
     components/           # Reusable components (e.g., Header, ImageComparison, etc.)
     context/              # React Context for managing global state (e.g., ThemeContext)
     data/                 # Sample data or API responses (e.g., patient-data.json)
-    queries/              # Queries    
+    queries/              # Queries
     graphql/              # Route
     styles/               # Global styles (globals.css)
     types/                # TypeScript types (e.g., patient.ts)
