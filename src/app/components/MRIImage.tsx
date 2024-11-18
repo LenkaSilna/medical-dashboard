@@ -40,7 +40,7 @@ const MRIImage: React.FC<MRIImageProps> = ({
             className="flex items-center space-x-2 w-full text-left text-sm font-medium text-black focus:outline-none"
           >
             <span>
-              {isOpen ? 'Hide Image Description' : 'Show Image Description'}
+              {isOpen ? 'Hide Additional Data' : 'Show Additional Data'}
             </span>
             {isOpen ? (
               <FaChevronUp className="text-black" />

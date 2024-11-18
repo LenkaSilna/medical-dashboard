@@ -13,6 +13,8 @@ const config: Config = {
         foreground: 'var(--foreground)',
         title: 'var(--title-color)',
         label: 'var(--label-color)',
+        border: 'var(--border-color)',
+        button: 'var(--button-color)',
       },
     },
   },

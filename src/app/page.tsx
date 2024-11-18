@@ -1,72 +1,17 @@
 'use client'
 
 import { useState } from 'react'
-import { useQuery } from 'urql'
-import { gql } from 'graphql-tag'
+import { useQuery } from '@apollo/client'
 import PatientCard from './components/PatientCard'
 import MRIImage from './components/MRIImage'
+import { GET_PATIENTS } from '@/app/queries/queries'
 import { GetPatientsResponse } from './types/patient'
 import Link from 'next/link'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
-const GET_PATIENTS = gql`
-  query GetPatients {
-    patients {
-      id
-      firstName
-      lastName
-      age
-      dateOfBirth
-      gender
-      bloodType
-      weight
-      height
-      contactInfo {
-        email
-        phone
-        address {
-          street
-          city
-          zipCode
-        }
-      }
-      lastDiagnosis
-      lastExamDate
-      medicalHistory {
-        date
-        condition
-        treatment
-        notes
-      }
-      allergies
-      medications {
-        name
-        dosage
-        frequency
-        startDate
-      }
-      brainMRI {
-        id
-        date
-        radiologist
-        equipmentInfo
-        slices {
-          id
-          imageUrl
-          position
-          description
-          findings
-          sequence
-          sliceThickness
-        }
-        conclusion
-      }
-    }
-  }
-`
-
 export default function HomePage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const { loading, error, data } = useQuery<GetPatientsResponse>(GET_PATIENTS)
 
   const handlePrevImage = () => {
     if (currentImageIndex > 0) {
@@ -75,24 +20,18 @@ export default function HomePage() {
   }
 
   const handleNextImage = () => {
-    if (currentImageIndex < patient.brainMRI.slices.length - 1) {
+    if (data && currentImageIndex < data.patients[0].brainMRI.slices.length - 1) {
       setCurrentImageIndex(currentImageIndex + 1)
     }
   }
 
-  const [result] = useQuery<GetPatientsResponse>({
-    query: GET_PATIENTS,
-  })
-
-  const { data, fetching, error } = result
-
-  if (fetching) {
+  if (loading) {
     return <p className="text-center text-green-600">Loading...</p>
   }
 
   if (error) {
     console.error('Error fetching patients:', error)
-    return <p className="text-center text-red-500">Failed to load data</p>
+    return <p className="text-center text-red-500">Failed to load data: {error.message}</p>
   }
 
   if (!data || !data.patients.length) {
@@ -139,18 +78,14 @@ export default function HomePage() {
             <MRIImage
               key={patient.brainMRI.slices[currentImageIndex].id}
               imageUrl={patient.brainMRI.slices[currentImageIndex].imageUrl}
-              description={
-                patient.brainMRI.slices[currentImageIndex].description
-              }
+              description={patient.brainMRI.slices[currentImageIndex].description}
               position={patient.brainMRI.slices[currentImageIndex].position}
               findings={patient.brainMRI.slices[currentImageIndex].findings}
               sequence={patient.brainMRI.slices[currentImageIndex].sequence}
-              sliceThickness={
-                patient.brainMRI.slices[currentImageIndex].sliceThickness
-              }
+              sliceThickness={patient.brainMRI.slices[currentImageIndex].sliceThickness}
             />
           </div>
-          <div className="mt-4 flex justify-between w-full max-w-sm">
+          <div className="flex justify-between gap-8 mt-4">
             <button
               onClick={handlePrevImage}
               disabled={currentImageIndex === 0}
@@ -161,9 +96,7 @@ export default function HomePage() {
 
             <button
               onClick={handleNextImage}
-              disabled={
-                currentImageIndex === patient.brainMRI.slices.length - 1
-              }
+              disabled={currentImageIndex === patient.brainMRI.slices.length - 1}
               className="p-2 bg-gray-600 text-white rounded-full disabled:opacity-30"
             >
               <FaArrowRight size={20} />

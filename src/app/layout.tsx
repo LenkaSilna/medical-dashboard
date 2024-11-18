@@ -1,6 +1,6 @@
 import './styles/globals.css'
 import ThemeProvider from '@/app/context/ThemeContext'
-import { UrqlProvider } from '@/app/context/UrqlContext'
+import { CustomApolloProvider } from '@/app/context/ApolloContext'
 import ClientLayout from '@/app/components/ClientLayout'
 
 export const metadata = {
@@ -17,9 +17,9 @@ export default function RootLayout({
     <html lang="cs" suppressHydrationWarning>
       <body suppressHydrationWarning>
         <ThemeProvider>
-          <UrqlProvider>
+          <CustomApolloProvider>
             <ClientLayout>{children}</ClientLayout>
-          </UrqlProvider>
+          </CustomApolloProvider>
         </ThemeProvider>
       </body>
     </html>
