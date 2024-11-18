@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import PatientCard from './components/PatientCard'
 import MRIImage from './components/MRIImage'
-import { GET_PATIENTS } from '@/app/queries/queries'
+import { GET_PATIENTS } from '@/app/queries'
 import { GetPatientsResponse } from './types/patient'
 import Link from 'next/link'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
@@ -50,28 +50,11 @@ export default function HomePage() {
   return (
     <div className="container mx-auto p-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Left column - patient info */}
         <div>
           <h2 className="text-xl font-bold mb-4">Patient Information</h2>
-          <PatientCard
-            firstName={patient.firstName}
-            lastName={patient.lastName}
-            age={patient.age}
-            dateOfBirth={patient.dateOfBirth}
-            gender={patient.gender}
-            bloodType={patient.bloodType}
-            weight={patient.weight}
-            height={patient.height}
-            contactInfo={patient.contactInfo}
-            lastDiagnosis={patient.lastDiagnosis}
-            lastExamDate={patient.lastExamDate}
-            medicalHistory={patient.medicalHistory}
-            allergies={patient.allergies}
-            medications={patient.medications}
-          />
+          <PatientCard patient={patient} />
         </div>
 
-        {/* Right column - MRI images */}
         <div className="space-y-4">
           <div className="flex align-middle justify-between">
             <h2 className="text-xl font-bold">MRI Images</h2>

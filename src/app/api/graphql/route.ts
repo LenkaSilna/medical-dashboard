@@ -76,7 +76,6 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     patients: () => {
-      console.log('Returning patients:', patientData.patients)
       return patientData.patients
     },
   },

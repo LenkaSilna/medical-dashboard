@@ -1,14 +1,16 @@
 'use client'
 import React, { useState } from 'react'
 import { useQuery } from '@apollo/client'
-import { GET_PATIENT_IMAGES } from '@/app/queries/queries'
+import { GET_PATIENT_IMAGES } from '@/app/queries'
 import ImageComparison from '@/app/components/ImageComparison'
 import { FaArrowLeft } from 'react-icons/fa'
 import type { GetPatientsResponse } from '@/app/types/patient'
+import { useRouter } from 'next/navigation'
 
 const ComparisonPage: React.FC = () => {
   const [leftImageIndex, setLeftImageIndex] = useState(0)
   const [rightImageIndex, setRightImageIndex] = useState(1)
+  const router = useRouter()
 
   const { loading, error, data } =
     useQuery<GetPatientsResponse>(GET_PATIENT_IMAGES)
@@ -22,7 +24,7 @@ const ComparisonPage: React.FC = () => {
   }
 
   const handleBackClick = () => {
-    window.history.back()
+    router.back()
   }
 
   if (loading) {

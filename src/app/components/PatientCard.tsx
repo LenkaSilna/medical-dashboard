@@ -2,40 +2,23 @@ import React, { useState } from 'react'
 import { Patient, Medication, MedicalHistoryEntry } from '@/app/types/patient'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 
-type PatientCardProps = Pick<
-  Patient,
-  | 'firstName'
-  | 'lastName'
-  | 'age'
-  | 'dateOfBirth'
-  | 'gender'
-  | 'bloodType'
-  | 'weight'
-  | 'height'
-  | 'contactInfo'
-  | 'lastDiagnosis'
-  | 'lastExamDate'
-  | 'allergies'
-  | 'medications'
-  | 'medicalHistory'
->
-
-const PatientCard: React.FC<PatientCardProps> = ({
-  firstName,
-  lastName,
-  age,
-  dateOfBirth,
-  gender,
-  bloodType,
-  weight,
-  height,
-  contactInfo,
-  lastDiagnosis,
-  lastExamDate,
-  allergies = [],
-  medications = [],
-  medicalHistory = [],
-}) => {
+const PatientCard: React.FC<{ patient: Patient }> = ({ patient }) => {
+  const {
+    firstName,
+    lastName,
+    age,
+    dateOfBirth,
+    gender,
+    bloodType,
+    weight,
+    height,
+    contactInfo,
+    lastDiagnosis,
+    lastExamDate,
+    medicalHistory,
+    allergies,
+    medications,
+  } = patient
   const [isContactInfoOpen, setIsContactInfoOpen] = useState(false)
   const [isMedicalInfoOpen, setIsMedicalInfoOpen] = useState(true)
   const [isMedicationsOpen, setIsMedicationsOpen] = useState(false)

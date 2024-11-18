@@ -2,11 +2,11 @@
 
 import Header from './Header'
 
-export default function ClientLayout({
-  children,
-}: {
+interface ClientLayoutProps {
   children: React.ReactNode
-}) {
+}
+
+export default function ClientLayout({ children }: ClientLayoutProps) {
   return (
     <>
       <Header />

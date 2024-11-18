@@ -8,11 +8,11 @@ export const metadata = {
   description: 'App for displaying patient medical data',
 }
 
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode
-}) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="cs" suppressHydrationWarning>
       <body suppressHydrationWarning>

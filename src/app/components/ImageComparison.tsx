@@ -30,9 +30,7 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
   const [zoomLevelRight, setZoomLevelRight] = useState(1)
   const [showLeftInfo, setShowLeftInfo] = useState(false)
   const [showRightInfo, setShowRightInfo] = useState(false)
-  console.log(slicesInfo)
 
-  // Zoom functions
   const zoomInLeft = () => setZoomLevelLeft((prev) => prev * 1.2)
   const zoomInRight = () => setZoomLevelRight((prev) => prev * 1.2)
 
@@ -68,9 +66,7 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
 
   return (
     <div className="relative">
-      {/* Image Selection Section */}
       <div className="flex flex-col align-middle md:flex-row justify-center md:justify-between mb-4 gap-2">
-        {/* Left Image select */}
         <div className="flex md:flex-row justify-center gap-0.5 items-center">
           <label className="mr-2 text-sm">Left Image</label>
           <select
@@ -89,7 +85,6 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
           </select>
         </div>
 
-        {/* Right Image select */}
         <div className="flex md:flex-row justify-center gap-0.5 items-center">
           <label className="mr-2 text-sm">Right Image</label>
           <select
@@ -109,11 +104,8 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
         </div>
       </div>
 
-      {/* Image Display Section */}
       <div className="flex flex-col md:flex-row justify-between gap-8">
-        {/* Left Image Container */}
         <div className="flex-1">
-          {/* Image */}
           <div
             className="relative overflow-auto mb-4"
             onWheel={(e) => handleWheel(e, 'left')}
@@ -149,7 +141,6 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
             </div>
           </div>
 
-          {/* Additional Data */}
           <div className="bg-white rounded-lg shadow">
             <div
               onClick={() => setShowLeftInfo(!showLeftInfo)}
@@ -187,9 +178,7 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
           </div>
         </div>
 
-        {/* Right Image Container */}
         <div className="flex-1">
-          {/* Image */}
           <div
             className="relative overflow-auto mb-4"
             onWheel={(e) => handleWheel(e, 'right')}
@@ -225,7 +214,6 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
             </div>
           </div>
 
-          {/* Additional Data */}
           <div className="bg-white rounded-lg shadow">
             <div
               onClick={() => setShowRightInfo(!showRightInfo)}
