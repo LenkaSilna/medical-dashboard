@@ -32,23 +32,35 @@ const PatientCard: React.FC<{ patient: Patient }> = ({ patient }) => {
         <h2 className="text-xl font-bold text-gray-800 mb-2">{name}</h2>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <p className="text-sm text-gray-600">Age: {age}</p>
+            <p className="text-sm text-gray-600">
+              <span className="font-bold">Age:</span> {age}
+            </p>
             {dateOfBirth && (
-              <p className="text-sm text-gray-600">Birth Date: {dateOfBirth}</p>
+              <p className="text-sm text-gray-600">
+                <span className="font-bold">Birth Date:</span> {dateOfBirth}
+              </p>
             )}
             {gender && (
-              <p className="text-sm text-gray-600">Gender: {gender}</p>
+              <p className="text-sm text-gray-600">
+                <span className="font-bold">Gender:</span> {gender}
+              </p>
             )}
           </div>
           <div>
             {bloodType && (
-              <p className="text-sm text-gray-600">Blood Type: {bloodType}</p>
+              <p className="text-sm text-gray-600">
+                <span className="font-bold">Blood Type:</span> {bloodType}
+              </p>
             )}
             {weight && (
-              <p className="text-sm text-gray-600">Weight: {weight} kg</p>
+              <p className="text-sm text-gray-600">
+                <span className="font-bold">Weight:</span> {weight} kg
+              </p>
             )}
             {height && (
-              <p className="text-sm text-gray-600">Height: {height} cm</p>
+              <p className="text-sm text-gray-600">
+                <span className="font-bold">Height:</span> {height} cm
+              </p>
             )}
           </div>
         </div>
@@ -65,10 +77,15 @@ const PatientCard: React.FC<{ patient: Patient }> = ({ patient }) => {
         </div>
         {isContactInfoOpen && (
           <div className="text-sm text-gray-600">
-            <p>Email: {contactInfo.email}</p>
-            <p>Phone: {contactInfo.phone}</p>
             <p>
-              Address: {contactInfo.address.street}, {contactInfo.address.city},{' '}
+              <span className="font-bold">Email:</span> {contactInfo.email}
+            </p>
+            <p>
+              <span className="font-bold">Phone:</span> {contactInfo.phone}
+            </p>
+            <p>
+              <span className="font-bold">Address:</span>{' '}
+              {contactInfo.address.street}, {contactInfo.address.city},{' '}
               {contactInfo.address.zipCode}
             </p>
           </div>
@@ -86,8 +103,15 @@ const PatientCard: React.FC<{ patient: Patient }> = ({ patient }) => {
         </div>
         {isMedicalInfoOpen && (
           <div className="text-sm text-gray-600">
-            <p>Last Diagnosis: {lastDiagnosis}</p>
-            {lastExamDate && <p>Last Exam Date: {lastExamDate}</p>}
+            <p>
+              <span className="font-bold">Last Diagnosis:</span> {lastDiagnosis}
+            </p>
+            {lastExamDate && (
+              <p>
+                <span className="font-bold">Last Exam Date:</span>{' '}
+                {lastExamDate}
+              </p>
+            )}
 
             {/* Medical History Section */}
             {medicalHistory.length > 0 && (

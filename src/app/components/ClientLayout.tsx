@@ -1,6 +1,6 @@
 'use client'
 
-import Header from './Header'
+import Header from '@/app/shared/Header'
 
 interface ClientLayoutProps {
   children: React.ReactNode

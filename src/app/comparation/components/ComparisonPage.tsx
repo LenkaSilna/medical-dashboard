@@ -2,10 +2,11 @@
 import React, { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_PATIENT_IMAGES } from '@/app/queries'
-import ImageComparison from '@/app/components/ImageComparison'
+import ImageComparison from '@/app/comparation/components/ImageComparison'
 import { FaArrowLeft } from 'react-icons/fa'
 import type { GetPatientsResponse } from '@/app/types/patient'
 import { useRouter } from 'next/navigation'
+import Loading from '@/app/shared/Loading'
 
 const ComparisonPage: React.FC = () => {
   const [leftImageIndex, setLeftImageIndex] = useState(0)
@@ -28,7 +29,7 @@ const ComparisonPage: React.FC = () => {
   }
 
   if (loading) {
-    return <p className="text-center text-green-600">Loading...</p>
+    return <Loading />
   }
 
   if (error) {
@@ -44,11 +45,16 @@ const ComparisonPage: React.FC = () => {
   }
 
   const { slices } = data.patients[0].brainMRI
+  const getBaseUrl = () =>
+    process.env.NEXT_PUBLIC_API_URL ||
+    (typeof window !== 'undefined'
+      ? window.location.origin
+      : 'http://localhost:3000')
+
   const comparisonImages = slices.map((slice) => {
-    if (slice.imageUrl.startsWith('/')) {
-      return `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}${slice.imageUrl}`
-    }
-    return slice.imageUrl
+    return slice.imageUrl.startsWith('/')
+      ? `${getBaseUrl()}${slice.imageUrl}`
+      : slice.imageUrl
   })
 
   return (

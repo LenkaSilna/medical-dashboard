@@ -1,4 +1,4 @@
-import ComparisonPage from '@/app/components/ComparisonPage'
+import ComparisonPage from '@/app/comparation/components/ComparisonPage'
 
 export default function Page() {
   return <ComparisonPage />

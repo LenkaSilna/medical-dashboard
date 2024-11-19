@@ -2,6 +2,7 @@ import { ApolloServer } from '@apollo/server'
 import { startServerAndCreateNextHandler } from '@as-integrations/next'
 import { gql } from 'graphql-tag'
 import patientData from '@/app/data/patient-data.json'
+import { NextRequest } from 'next/server'
 
 const typeDefs = gql`
   type Address {
@@ -86,6 +87,12 @@ const server = new ApolloServer({
   resolvers,
 })
 
-const handler = startServerAndCreateNextHandler(server)
+const handler = startServerAndCreateNextHandler(server, {
+  context: async (req: NextRequest) => {
+    return { req }
+  },
+})
 
-export { handler as GET, handler as POST }
+export const POST = async (req: NextRequest) => {
+  return handler(req)
+}

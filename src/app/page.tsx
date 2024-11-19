@@ -8,6 +8,7 @@ import { GET_PATIENTS } from '@/app/queries'
 import { GetPatientsResponse } from './types/patient'
 import Link from 'next/link'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import Loading from '@/app/shared/Loading'
 
 export default function HomePage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -29,7 +30,7 @@ export default function HomePage() {
   }
 
   if (loading) {
-    return <p className="text-center text-green-600">Loading...</p>
+    return <Loading />
   }
 
   if (error) {

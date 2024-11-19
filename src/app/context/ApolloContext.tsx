@@ -1,14 +1,19 @@
 'use client'
 
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  NormalizedCacheObject,
+} from '@apollo/client'
 import { useState } from 'react'
 
-export function CustomApolloProvider({
-  children,
-}: {
+interface CustomApolloProviderProps {
   children: React.ReactNode
-}) {
-  const [client] = useState(
+}
+
+export function CustomApolloProvider({ children }: CustomApolloProviderProps) {
+  const [client] = useState<ApolloClient<NormalizedCacheObject>>(
     () =>
       new ApolloClient({
         uri: '/api/graphql',
