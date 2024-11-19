@@ -1,29 +1,29 @@
-'use client';
-import React, { useState, useEffect, useRef } from 'react';
+'use client'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   FaSearchPlus,
   FaSearchMinus,
   FaChevronDown,
   FaChevronUp,
-} from 'react-icons/fa';
-import Image from 'next/image';
-import { MRISlice } from '@/app/types/patient';
+} from 'react-icons/fa'
+import Image from 'next/image'
+import { MRISlice } from '@/app/types/patient'
 
 type ImageComparisonProps = {
-  images: string[];
-  slicesInfo: MRISlice[];
-  leftImageIndex: number;
-  rightImageIndex: number;
-  onLeftImageChange: (index: number) => void;
-  onRightImageChange: (index: number) => void;
-};
+  images: string[]
+  slicesInfo: MRISlice[]
+  leftImageIndex: number
+  rightImageIndex: number
+  onLeftImageChange: (index: number) => void
+  onRightImageChange: (index: number) => void
+}
 
 type Point = {
-  x: number;
-  y: number;
-};
+  x: number
+  y: number
+}
 
-const DEFAULT_POSITION: Point = { x: 0, y: 0 };
+const DEFAULT_POSITION: Point = { x: 0, y: 0 }
 
 const ImageComparison: React.FC<ImageComparisonProps> = ({
   images,
@@ -33,42 +33,45 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
   onLeftImageChange,
   onRightImageChange,
 }) => {
-  const [zoomLevelLeft, setZoomLevelLeft] = useState(1);
-  const [zoomLevelRight, setZoomLevelRight] = useState(1);
-  const [offsetLeft, setOffsetLeft] = useState<Point>(DEFAULT_POSITION);
-  const [offsetRight, setOffsetRight] = useState<Point>(DEFAULT_POSITION);
-  const [showLeftInfo, setShowLeftInfo] = useState(false);
-  const [showRightInfo, setShowRightInfo] = useState(false);
-  
-  const leftImageRef = useRef<HTMLDivElement>(null);
-  const rightImageRef = useRef<HTMLDivElement>(null);
+  const [zoomLevelLeft, setZoomLevelLeft] = useState(1)
+  const [zoomLevelRight, setZoomLevelRight] = useState(1)
+  const [offsetLeft, setOffsetLeft] = useState<Point>(DEFAULT_POSITION)
+  const [offsetRight, setOffsetRight] = useState<Point>(DEFAULT_POSITION)
+  const [showLeftInfo, setShowLeftInfo] = useState(false)
+  const [showRightInfo, setShowRightInfo] = useState(false)
+
+  const leftImageRef = useRef<HTMLDivElement>(null)
+  const rightImageRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const leftElement = leftImageRef.current;
-    const rightElement = rightImageRef.current;
+    const leftElement = leftImageRef.current
+    const rightElement = rightImageRef.current
 
-    if (!leftElement || !rightElement) return;
+    if (!leftElement || !rightElement) return
 
     const preventScroll = (e: WheelEvent) => {
-      e.preventDefault();
-    };
+      e.preventDefault()
+    }
 
-    leftElement.addEventListener('wheel', preventScroll, { passive: false });
-    rightElement.addEventListener('wheel', preventScroll, { passive: false });
+    leftElement.addEventListener('wheel', preventScroll, { passive: false })
+    rightElement.addEventListener('wheel', preventScroll, { passive: false })
 
     return () => {
-      leftElement.removeEventListener('wheel', preventScroll);
-      rightElement.removeEventListener('wheel', preventScroll);
-    };
-  }, []);
+      leftElement.removeEventListener('wheel', preventScroll)
+      rightElement.removeEventListener('wheel', preventScroll)
+    }
+  }, [])
 
-  const getRelativeMousePosition = (event: React.MouseEvent | React.WheelEvent, container: HTMLElement): Point => {
-    const rect = container.getBoundingClientRect();
+  const getRelativeMousePosition = (
+    event: React.MouseEvent | React.WheelEvent,
+    container: HTMLElement
+  ): Point => {
+    const rect = container.getBoundingClientRect()
     return {
       x: event.clientX - rect.left,
       y: event.clientY - rect.top,
-    };
-  };
+    }
+  }
 
   const calculateZoomOffset = (
     container: HTMLElement,
@@ -78,69 +81,92 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
     newZoom: number
   ): Point => {
     if (newZoom === 1) {
-      return DEFAULT_POSITION;
+      return DEFAULT_POSITION
     }
 
-    const mouse = getRelativeMousePosition(event, container);
-    
+    const mouse = getRelativeMousePosition(event, container)
+
     return {
       x: mouse.x - (mouse.x - currentOffset.x) * (newZoom / currentZoom),
       y: mouse.y - (mouse.y - currentOffset.y) * (newZoom / currentZoom),
-    };
-  };
+    }
+  }
 
   const handleZoom = (
     side: 'left' | 'right',
     zoomIn: boolean,
     event: React.MouseEvent | React.WheelEvent
   ) => {
-    const container = side === 'left' ? leftImageRef.current : rightImageRef.current;
-    if (!container) return;
+    const container =
+      side === 'left' ? leftImageRef.current : rightImageRef.current
+    if (!container) return
 
-    const zoomFactor = zoomIn ? 1.2 : 1 / 1.2;
-    const minZoom = 1;
-    const maxZoom = 30;
+    const zoomFactor = zoomIn ? 1.2 : 1 / 1.2
+    const minZoom = 1
+    const maxZoom = 30
 
     if (side === 'left') {
       setZoomLevelLeft((prevZoom) => {
-        const newZoom = Math.min(Math.max(prevZoom * zoomFactor, minZoom), maxZoom);
+        const newZoom = Math.min(
+          Math.max(prevZoom * zoomFactor, minZoom),
+          maxZoom
+        )
         if (newZoom !== prevZoom) {
           if (newZoom === 1) {
-            setOffsetLeft(DEFAULT_POSITION);
+            setOffsetLeft(DEFAULT_POSITION)
           } else {
-            setOffsetLeft(calculateZoomOffset(container, event, offsetLeft, prevZoom, newZoom));
+            setOffsetLeft(
+              calculateZoomOffset(
+                container,
+                event,
+                offsetLeft,
+                prevZoom,
+                newZoom
+              )
+            )
           }
         }
-        return newZoom;
-      });
+        return newZoom
+      })
     } else {
       setZoomLevelRight((prevZoom) => {
-        const newZoom = Math.min(Math.max(prevZoom * zoomFactor, minZoom), maxZoom);
+        const newZoom = Math.min(
+          Math.max(prevZoom * zoomFactor, minZoom),
+          maxZoom
+        )
         if (newZoom !== prevZoom) {
           if (newZoom === 1) {
-            setOffsetRight(DEFAULT_POSITION);
+            setOffsetRight(DEFAULT_POSITION)
           } else {
-            setOffsetRight(calculateZoomOffset(container, event, offsetRight, prevZoom, newZoom));
+            setOffsetRight(
+              calculateZoomOffset(
+                container,
+                event,
+                offsetRight,
+                prevZoom,
+                newZoom
+              )
+            )
           }
         }
-        return newZoom;
-      });
+        return newZoom
+      })
     }
-  };
+  }
 
   const handleWheel = (e: React.WheelEvent, side: 'left' | 'right') => {
-    handleZoom(side, e.deltaY < 0, e);
-  };
+    handleZoom(side, e.deltaY < 0, e)
+  }
 
   const resetZoom = (side: 'left' | 'right') => {
     if (side === 'left') {
-      setZoomLevelLeft(1);
-      setOffsetLeft(DEFAULT_POSITION);
+      setZoomLevelLeft(1)
+      setOffsetLeft(DEFAULT_POSITION)
     } else {
-      setZoomLevelRight(1);
-      setOffsetRight(DEFAULT_POSITION);
+      setZoomLevelRight(1)
+      setOffsetRight(DEFAULT_POSITION)
     }
-  };
+  }
 
   const renderImage = (
     side: 'left' | 'right',
@@ -151,18 +177,20 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
     showInfo: boolean,
     setShowInfo: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
-    const handleZoomIn = (e: React.MouseEvent) => handleZoom(side, true, e);
-    const handleZoomOut = (e: React.MouseEvent) => handleZoom(side, false, e);
+    const handleZoomIn = (e: React.MouseEvent) => handleZoom(side, true, e)
+    const handleZoomOut = (e: React.MouseEvent) => handleZoom(side, false, e)
 
     return (
       <div className="flex-1 relative">
         <div className="flex justify-between items-center mb-2">
-          <label className="mr-2 text-sm">{side === 'left' ? 'Left' : 'Right'} Image</label>
+          <label className="mr-2 text-sm">
+            {side === 'left' ? 'Left' : 'Right'} Image
+          </label>
           <select
             value={imageIndex}
             onChange={(e) => {
-              onImageChange(Number(e.target.value));
-              resetZoom(side);
+              onImageChange(Number(e.target.value))
+              resetZoom(side)
             }}
             className="p-2 border rounded text-sm"
           >
@@ -248,8 +276,8 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
           )}
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <div className="flex flex-col md:flex-row justify-between gap-8">
@@ -272,7 +300,7 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
         setShowRightInfo
       )}
     </div>
-  );
-};
+  )
+}
 
-export default ImageComparison;
+export default ImageComparison

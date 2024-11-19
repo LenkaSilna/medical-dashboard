@@ -1,8 +1,8 @@
-'use client';
-import React from 'react';
+'use client'
+import React from 'react'
 
 interface LoadingProps {
-  className?: string;
+  className?: string
 }
 
 const Loading: React.FC<LoadingProps> = ({ className = '' }) => {
@@ -18,7 +18,7 @@ const Loading: React.FC<LoadingProps> = ({ className = '' }) => {
                 top: '50%',
                 left: '50%',
                 transform: `rotate(${index * 45}deg) translate(0, -150%)`,
-                opacity: 1 - (index * 0.1),
+                opacity: 1 - index * 0.1,
                 animation: `loadingFade 1.2s ${index * 0.15}s linear infinite`,
               }}
             />
@@ -36,7 +36,7 @@ const Loading: React.FC<LoadingProps> = ({ className = '' }) => {
         }
       `}</style>
     </div>
-  );
-};
+  )
+}
 
-export default Loading;
+export default Loading
