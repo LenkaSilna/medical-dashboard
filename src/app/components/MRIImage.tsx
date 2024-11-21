@@ -29,7 +29,6 @@ const MRIImage: React.FC<MRIImageProps> = ({
           src={imageUrl}
           alt={description}
           fill
-          sizes={'500px'}
           className="rounded-lg object-cover"
         />
       </div>
